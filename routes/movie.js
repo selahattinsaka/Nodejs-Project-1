@@ -25,17 +25,11 @@ router.get('/', (req, res) => {
 });
 
 router.delete('/:movie_id', (req, res, next) => {
-  const promise = Movie.findByIdAndRemove(
-      req.params.movie_id,
-      req.body,
-      {
-        new: true
-      }
-  );
+  const promise = Movie.findByIdAndRemove(req.params.movie_id);
   promise.then((movie) => {
     if (!movie)
       next({message: 'The movie was not found.', code: 99});
-    res.json(movie);
+    res.json("Movie has been deleted");
   }).catch((err) => {
     res.json(err);
   });
